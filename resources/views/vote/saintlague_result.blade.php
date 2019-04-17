@@ -2,15 +2,15 @@
 
 @section('content')
 
-<h1>Saint Lague Result</h1>
+<h1>Hasil Perhitungan Saint Lague</h1>
 <table class="table table-dark">
     <thead>
         <tr>
             <th>Partai</th>
-            @for ($i = 0; $i < 10; $i++)
-                <th>/ {{ 2 * $i + 1 }}</th> 
+            @for ($i = 1; $i < 11; $i++)
+                <th>Kursi {{ $i  }}</th> 
             @endfor
-            <th>Total Suara</th>
+            <th>Total Kursi</th>
         </tr>
     </thead>
 
@@ -33,7 +33,5 @@
         @endforeach
     </tbody>
 </table>
-
-
 
 @endsection
