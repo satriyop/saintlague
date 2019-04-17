@@ -10,6 +10,7 @@
             @for ($i = 0; $i < 10; $i++)
                 <th>/ {{ 2 * $i + 1 }}</th> 
             @endfor
+            <th>Total Suara</th>
         </tr>
     </thead>
 
@@ -25,9 +26,14 @@
                 {{ round($result) }}
             </td>
             @endforeach
+            <td>
+                {{ $party['seat'] }}
+            </td>
         </tr>
         @endforeach
     </tbody>
 </table>
+
+
 
 @endsection

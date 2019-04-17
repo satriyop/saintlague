@@ -23,7 +23,7 @@ class VoteController extends Controller
     public function store(Vote $vote)
     {
         $votes = request()->all();
-        
+        $available_seat = 10;
         $total_votes = [
             'pkb' => intval($votes['pkb']),
             'gerindra' => intval($votes['gerindra']),
@@ -60,7 +60,7 @@ class VoteController extends Controller
         $pbb = [];
         $pkpi = [];
 
-        for ($i=0; $i < 10; $i++) { 
+        for ($i=0; $i < $available_seat; $i++) { 
             $pkb["divisor_". (2 * $i + 1) ] = $total_votes['pkb'] / (2 * $i + 1);
             $gerindra["divisor_". (2 * $i + 1)] = $total_votes['gerindra'] / (2 * $i + 1);
             $pdip["divisor_". (2 * $i + 1)] = $total_votes['pdip'] / (2 * $i + 1);
@@ -83,103 +83,134 @@ class VoteController extends Controller
             'parties' => [
                 'pkb' => [
                     'name' => 'PKB',
-                    'vote' => $pkb
+                    'vote' => [],
+                    'seat' => 0,
+                    'total_votes' => $total_votes['pkb']
                 ],
                 'gerindra' =>  [
                     'name' => 'Gerindra',
-                    'vote' => $gerindra
+                    'vote' => [],
+                    'seat' => 0,
+                    'total_votes' => $total_votes['gerindra']
+
                 ] ,
                 'pdip' => [
                     'name' => 'PDI P',
-                    'vote' => $pdip
+                    'vote' => [],
+                    'seat' => 0,
+                    'total_votes' => $total_votes['pdip']
+
                 ] ,
                 'golkar' => [
                     'name' => 'Golkar',
-                    'vote' => $golkar
+                    'vote' => [],
+                    'seat' => 0,
+                    'total_votes' => $total_votes['golkar']
+
                 ],
                 'nasdem' => [
                     'name' => 'Nasdem',
-                    'vote' => $nasdem
+                    'vote' => [],
+                    'seat' => 0,
+                    'total_votes' => $total_votes['nasdem']
+
                 ],
                 'garuda' => [
                     'name' => 'GARUDA',
-                    'vote' => $garuda
+                    'vote' => [],
+                    'seat' => 0,
+                    'total_votes' => $total_votes['garuda']
+
                 ],
                 'berkarya' => [
                     'name' => 'Partai Berkarya',
-                    'vote' => $berkarya
+                    'vote' => [],
+                    'seat' => 0,
+                    'total_votes' => $total_votes['berkarya']
+
                 ],
                 'pks' => [
                     'name' => 'PKS',
-                    'vote' => $pks
+                    'vote' => [],
+                    'seat' => 0,
+                    'total_votes' => $total_votes['pks']
+
                 ],
                 'perindo' => [
                     'name' => 'PKB',
-                    'vote' => $perindo
+                    'vote' => [],
+                    'seat' => 0,
+                    'total_votes' => $total_votes['perindo']
+
                 ],
                 'ppp' => [
                     'name' => 'PPP',
-                    'vote' => $ppp
+                    'vote' => [],
+                    'seat' => 0,
+                    'total_votes' => $total_votes['ppp']
+
                 ],
                 'psi' => [
                     'name' => 'PSI',
-                    'vote' => $psi
+                    'vote' => [],
+                    'seat' => 0,
+                    'total_votes' => $total_votes['psi']
+
                 ],
                 'pan' => [
                     'name' => 'PAN',
-                    'vote' => $pan
+                    'vote' => [],
+                    'seat' => 0,
+                    'total_votes' => $total_votes['psi']
+
                 ],
                 'hanura' => [
                     'name' => 'HANURA',
-                    'vote' => $hanura
+                    'vote' => [],
+                    'seat' => 0,
+                    'total_votes' => $total_votes['hanura']
+
                 ],
                 'demokrat' => [
                     'name' => 'Partai Demokrat',
-                    'vote' => $demokrat
+                    'vote' => [],
+                    'seat' => 0,
+                    'total_votes' => $total_votes['demokrat']
+
                 ],
                 'pbb' => [
                     'name' => 'PBB',
-                    'vote' => $pbb
+                    'vote' => [],
+                    'seat' => 0,
+                    'total_votes' => $total_votes['pbb']
+
                 ],
                 'pkpi' => [
                     'name' => 'PKPI',
-                    'vote' => $pkpi
+                    'vote' => [],
+                    'seat' => 0,
+                    'total_votes' => $total_votes['pkpi']
                 ],
             ]
         ];
+        
         // dd($tabulation);
-        $total_result = [];
-        foreach ($tabulation as $party) {
-            array_map(function($result) {
-                $result['vote'];
-            }, $party);
-        }
-        dd($total_result);
-        // $total_tabulation = []; 
-        // for ($i=0; $i < 10; $i++) { 
-        //     $total_tabulation['divisor_' . (2 * $i + 1)] = [
-        //     // $total_tabulation['divisor'] = [
-        //         'pkb' => $tabulation["parties"]["pkb"]["vote"]["divisor_".(2 * $i + 1)],
-        //         'gerindra' => $tabulation["parties"]["gerindra"]["vote"]["divisor_". (2 * $i + 1)],
-        //         'pdip' => $tabulation["parties"]["pdip"]["vote"]["divisor_". (2 * $i + 1)],
-        //         'golkar' => $tabulation["parties"]["golkar"]["vote"]["divisor_". (2 * $i + 1)],
-        //         'nasdem' => $tabulation["parties"]["nasdem"]["vote"]["divisor_". (2 * $i + 1)],
-        //         'garuda' => $tabulation["parties"]["garuda"]["vote"]["divisor_". (2 * $i + 1)],
-        //         'berkarya' => $tabulation["parties"]["berkarya"]["vote"]["divisor_". (2 * $i + 1)],
-        //         'pks' => $tabulation["parties"]["pks"]["vote"]["divisor_". (2 * $i + 1)],
-        //         'perindo' => $tabulation["parties"]["perindo"]["vote"]["divisor_". (2 * $i + 1)],
-        //         'ppp' => $tabulation["parties"]["ppp"]["vote"]["divisor_". (2 * $i + 1)],
-        //         'psi' => $tabulation["parties"]["psi"]["vote"]["divisor_". (2 * $i + 1)],
-        //         'pan' => $tabulation["parties"]["pan"]["vote"]["divisor_". (2 * $i + 1)],
-        //         'hanura' => $tabulation["parties"]["hanura"]["vote"]["divisor_". (2 * $i + 1)],
-        //         'demokrat' => $tabulation["parties"]["demokrat"]["vote"]["divisor_". (2 * $i + 1)],
-        //         'pbb' => $tabulation["parties"]["pbb"]["vote"]["divisor_". (2 * $i + 1)],
-        //         'pkpi' => $tabulation["parties"]["pkpi"]["vote"]["divisor_". (2 * $i + 1)],
-        //     ];
-        //     // arsort($total_tabulation['divisor']);
-        //     arsort($total_tabulation['divisor_' . (2 * $i + 1)]);
-        // }
+        for ($i=0; $i < $available_seat; $i++) { 
+            foreach ($tabulation['parties'] as $party => $party_votes) {
+                    // dd($party_votes);
+                    $quotient = $party_votes['total_votes'] / ((2 * $party_votes['seat']) + 1);
+                    $temp_votes[$party]['vote'] = $quotient;
+                    array_push($tabulation['parties'][$party]['vote'], $quotient);
+                    // array_push($party_votes['vote'], $quotient);
+            }
+            arsort($temp_votes);
+            // dd($party_votes);
+            $winner_index	= key($temp_votes);
+            $tabulation['parties'][$winner_index]['seat']	= $tabulation['parties'][$winner_index]['seat'] + 1;
+            // var_dump($tabulation);
 
+        }
+        // dd($tabulation);
 
         return view('vote.saintlague_result', $tabulation);
     }
