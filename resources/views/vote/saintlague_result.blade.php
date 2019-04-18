@@ -9,7 +9,7 @@
             <tr>
                 <th>Partai</th>
                 @for ($i = 1; $i < 11; $i++)
-                    <th>Kursi {{ $i  }}</th> 
+                    <th> {{ $i  }}</th> 
                 @endfor
                 <th>Total Kursi</th>
             </tr>
@@ -27,21 +27,6 @@
 
             @foreach ($parties as $party)
             <tr>
-                {{-- @if (round(($party['total_votes']/$total_votes)) > 0.4)
-                    <th>
-                        {{ strtoupper($party['name']) }} - 
-                        {{ round(($party['total_votes']/$total_votes) * 100) }} %
-                    </th>
-                    @foreach ($party['vote'] as $result)
-                    <td>
-                        {{ round($result) }} 
-                    </td>
-                    @endforeach
-                    <td>
-                        {{ $party['seat'] }}
-                    </td>
-                @endif --}}
-
                 <th>
                     {{ strtoupper($party['name']) }} - 
                     {{ round(($party['total_votes']/$total_votes) * 100) }} %
