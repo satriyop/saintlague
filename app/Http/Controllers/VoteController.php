@@ -38,6 +38,7 @@ class VoteController extends Controller
 
 
         $tabulation = [
+            'total_votes' => array_sum($total_votes),
             'winners' => [],
             'parties' => [
                 'pkb' => [
