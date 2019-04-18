@@ -1,37 +1,48 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="container">
+    <h4>Hasil Perhitungan Saint Lague</h4>
 
-<h1>Hasil Perhitungan Saint Lague</h1>
-<table class="table table-dark">
-    <thead>
-        <tr>
-            <th>Partai</th>
-            @for ($i = 1; $i < 11; $i++)
-                <th>Kursi {{ $i  }}</th> 
-            @endfor
-            <th>Total Kursi</th>
-        </tr>
-    </thead>
-
+    <table class="table table-dark table-striped table-hover table-responsive-lg">
+        <thead>
+            <tr>
+                <th>Partai</th>
+                @for ($i = 1; $i < 11; $i++)
+                    <th>Kursi {{ $i  }}</th> 
+                @endfor
+                <th>Total Kursi</th>
+            </tr>
+        </thead>
     
-    <tbody>     
-        @foreach ($parties as $party)
-        <tr>
+        
+        <tbody>     
             <th>
-                {{ $party['name'] }}
-            </th>
-            @foreach ($party['vote'] as $result)
-            <td>
-                {{ round($result) }}
-            </td>
+            @foreach ($winners as $winner)
+                <td>
+                {{ strtoupper($winner) }}
+                </td>
             @endforeach
-            <td>
-                {{ $party['seat'] }}
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
+            <th>
+
+            @foreach ($parties as $party)
+            <tr>
+                <th>
+                    {{ strtoupper($party['name']) }}
+                </th>
+                @foreach ($party['vote'] as $result)
+                <td>
+                    {{ round($result) }} 
+                </td>
+                @endforeach
+                <td>
+                    {{ $party['seat'] }}
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
+
 
 @endsection
